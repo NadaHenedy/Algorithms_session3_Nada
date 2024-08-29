@@ -1,0 +1,19 @@
+from typing import List
+
+class Solution:
+    def merge(self, list: List[List[int]]) -> List[List[int]]:
+        sorted_list = sorted(list, key=lambda x: x[0])
+
+        last = sorted_list[0]
+        list_merge = []
+
+        for i in sorted_list[1:]:
+            if i[0] <= last[1]:
+                last[1] = max(last[1], i[1])
+            else:
+                list_merge.append(last)
+                last = i
+
+        list_merge.append(last)
+
+        return list_merge
