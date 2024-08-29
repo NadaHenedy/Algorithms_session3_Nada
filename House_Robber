@@ -1,0 +1,16 @@
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        length = len(nums)
+        # if there is only one home 
+        if length == 1:
+            return nums[0]
+        
+        amount_list = [0] * length #empty array to store amount of money
+        
+        amount_list[0] = nums[0]
+        amount_list[1] = max(nums[0], nums[1])
+        
+        for i in range(2, length):
+            amount_list[i] = max(amount_list[i-1], nums[i] + amount_list[i-2])
+        
+        return amount_list[-1] # amount that stored at the end of array
