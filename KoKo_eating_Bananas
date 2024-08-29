@@ -1,0 +1,21 @@
+class Solution(object):
+    def minEatingSpeed(self, piles, h):
+        start = 1
+        end = max(piles)
+        
+        while start < end:
+            midium = (start + end) / 2
+            if self.canEatAll(piles, midium, h):
+                end = midium
+            else:
+                start = midium + 1
+        
+        return start
+    
+    def canEatAll(self, piles, speed, h):
+        time = 0
+        for i in piles:
+            time += (i - 1) / speed + 1
+            if time > h:
+                return False
+        return True
